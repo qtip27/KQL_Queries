@@ -1,0 +1,14 @@
+AzureNetworkAnalytics_CL
+| extend NSGRuleAction=split(NSGRules_s,'|',3)[0]
+| extend NSGRuleName=tostring(split(NSGRules_s,'|',1)[0])
+| extend NSGName=tostring(split(NSGList_s,'/',2)[0])
+| extend Subnet1 = iif(FlowType_s in ('InterVNet', 'IntraVNet'), Subnet1_s, iif(FlowDirection_s == 'O',  Subnet_s, '' )), Subnet2 = iif(FlowType_s in ('InterVNet', 'IntraVNet'), Subnet2_s, iif(FlowDirection_s == 'I', Subnet_s, '' ))
+| extend VM1 = iif(FlowType_s in ('InterVNet','IntraVNet'), VM1_s, iif(FlowDirection_s == 'O', VM_s, '' )), VM2 = iif(FlowType_s in ('InterVNet','IntraVNet'), VM2_s, iif(FlowDirection_s == 'I', VM_s, '' ))
+| extend Subscription1 = iif(FlowType_s == 'InterVNet',Subscription1_g, iif(FlowType_s == 'IntraVNet' or FlowDirection_s == 'O', Subscription_g, '')), Subscription2 = iif(FlowType_s == 'InterVNet', Subscription2_g, iif(FlowType_s == 'IntraVNet' or FlowDirection_s == 'I', Subscription_g, ''))
+| extend NIC1 = iif(FlowType_s in ('InterVNet', 'IntraVNet'), NIC1_s, iif(FlowDirection_s == 'O', NIC_s, '')), NIC2 = iif(FlowType_s in ('InterVNet', 'IntraVNet'), NIC2_s, iif(FlowDirection_s == 'I', NIC_s, ''))
+| extend SrcIP = iif(isnotempty(SrcIP_s), SrcIP_s, iif(FlowDirection_s == 'O', VMIP_s, '')), DestIP = iif(isnotempty(DestIP_s), DestIP_s, iif(FlowDirection_s == 'I', VMIP_s, ''))
+| extend CountryOrRegion = iif(FlowType_s == 'AzurePublic', AzureRegion_s, Country_s)
+| extend FlowDirection_s = iif(FlowType_s in ('InterVNet','IntraVNet'), '', FlowDirection_s)
+| where FlowDirection_s == "I"
+| where NSGRuleAction == "D" 
+| summarize count() by SourceIP=SrcIP_s, DestinationIP=DestIP_s, DestinationPort=DestPort_d, TimeGenerated, NSGName, NSGRuleName, SourceSubnet=Subnet1_s, DestinationSubnet=Subnet2_s, FlowCount = (FlowCount_d), AllowedInFlows = (AllowedInFlows_d), DeniedInFlows = (DeniedInFlows_d) , L7Protocol = strcat(L7Protocol_s, ' (', toint(DestPort_d), ')'),VM=VM2, Subnet=Subnet2, Subscription=Subscription2
