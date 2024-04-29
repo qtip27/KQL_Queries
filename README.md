@@ -28,10 +28,8 @@ Contributions to this repository are highly encouraged! If you have useful KQL q
 4. Create a pull request with a clear description of your changes.
 5. Your contribution will be reviewed, and once approved, it will be merged into the main branch.
 
-License
-This project is licensed under the MIT License, allowing for free use, modification, and distribution of the codebase.
 
 Contact
-For any questions, feedback, or support regarding this repository, please contact your_email@example.com.
+For any questions, feedback, or support regarding this repository, please contact donaldhunter5@gmail.com.
 
 Feel free to customize the README page according to your specific repository needs and preferences!
