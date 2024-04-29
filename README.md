@@ -6,10 +6,10 @@ KQL, also known as Kusto Query Language, is a powerful query language used in Az
 
 This repository aims to provide a centralized resource for KQL queries, covering a wide range of scenarios including:
 
-Monitoring Azure resources
-Analyzing logs and metrics
-Detecting anomalies and security threats
-Optimizing resource utilization
+- Monitoring Azure resources
+- Analyzing logs and metrics
+- Detecting anomalies and security threats
+- Optimizing resource utilization
 
 ## Getting Started
 To get started with KQL queries in Azure, follow these steps:
