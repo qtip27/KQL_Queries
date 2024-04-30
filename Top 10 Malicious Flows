@@ -1,3 +1,6 @@
+// Top 10 Malicious IP's within a 48 hour period
+// You can remove "limit 10" to see all of the Malicious IP's within the time period
+
 AzureNetworkAnalytics_CL
 | where TimeGenerated > ago(2d)
 | where SubType_s == 'FlowLog' and  FASchemaVersion_s == '2' and FlowType_s == 'MaliciousFlow'
