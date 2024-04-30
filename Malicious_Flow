@@ -1,4 +1,5 @@
-//Custom Query for Malicious Flow to the Network Security Group (NSG) from the Flow Logs
+// Custom Query for Malicious Flow to the Network Security Group (NSG) from the Flow Logs
+// This will display the IP Addess, Virtual Machine (VM), Virtual Network, Subscription, Flow Count, Allowed In Flows, and Protocol
 
 AzureNetworkAnalytics_CL
 | where SubType_s == 'FlowLog' and  FASchemaVersion_s == '2' and FlowType_s == 'MaliciousFlow'
