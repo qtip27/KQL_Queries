@@ -1,3 +1,6 @@
+// Query for the Top 10 Protocols from Flow Logs
+// You can remove "limit 10" to see all Protocols
+
 AzureNetworkAnalytics_CL
 | where TimeGenerated > ago(2d)
 | where SubType_s == 'FlowLog' and  FASchemaVersion_s == '2' and FlowType_s == 'MaliciousFlow'
