@@ -1,3 +1,5 @@
+//Custom Query for Malicious Flow to the Network Security Group (NSG) from the Flow Logs
+
 AzureNetworkAnalytics_CL
 | where SubType_s == 'FlowLog' and  FASchemaVersion_s == '2' and FlowType_s == 'MaliciousFlow'
 | extend Subnet1 = iif(FlowType_s in ('InterVNet', 'IntraVNet'), Subnet1_s, iif(FlowDirection_s == 'O',  Subnet_s, '' )), Subnet2 = iif(FlowType_s in ('InterVNet', 'IntraVNet'), Subnet2_s, iif(FlowDirection_s == 'I', Subnet_s, '' ))
