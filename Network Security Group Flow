@@ -1,3 +1,7 @@
+// Displays the Source IP, Dest. IP, Port, Network Security Group (NSG), and NSG Rule
+// Will have to change Flow Direction "I" = Inbound, "O" = Outbound and NSG Rule Action "D"= Deny, "A" = Allow
+// Displays Virtual Machine (VM), Subnet, and Subscription
+
 AzureNetworkAnalytics_CL
 | extend NSGRuleAction=split(NSGRules_s,'|',3)[0]
 | extend NSGRuleName=tostring(split(NSGRules_s,'|',1)[0])
